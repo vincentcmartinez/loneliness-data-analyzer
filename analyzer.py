@@ -50,14 +50,25 @@ class Analyzer:
         print(f"P-value: {p_value:.4f}")
 
     def show_plots(self):
-        plt.figure(figsize=(10, 5))
-        plt.subplot(1, 2, 1)
+        plt.figure(figsize=(15, 5))
+
+        plt.subplot(1, 3, 1)
         sns.histplot(self.home_times)
         plt.title('Home Times Distribution')
 
-        plt.subplot(1, 2, 2)
+        plt.subplot(1, 3, 2)
         sns.histplot(self.loneliness_scores)
         plt.title('Loneliness Scores Distribution')
+
+        plt.subplot(1, 3, 3)
+        sns.scatterplot(x=self.home_times, y=self.loneliness_scores)
+        plt.title('Home Times vs Loneliness Scores')
+        plt.xlabel('Home Times')
+        plt.ylabel('Loneliness Scores')
+
+        plt.tight_layout()
+
+        plt.savefig("fig.png")
         plt.show()
 
         _, home_times_p = stats.shapiro(self.home_times)
